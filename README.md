@@ -19,7 +19,7 @@ gcloud iam service-accounts keys create service-account-gcp-quota-exporter.json 
 
 ### Launch exporter as a test
 ```bash
-docker run -it --rm -v $(pwd)/service-account-gcp-quota-exporter.json:/app/credentials.json mintel/gcp-quota-exporter myproject
+docker run -it --rm -v $(pwd)/service-account-gcp-quota-exporter.json:/app/credentials.json mintel/gcp-quota-exporter ${GCP_PROJECT}
 ```
 
 ### Check exporter output
@@ -48,3 +48,8 @@ helm upgrade --install --namespace monitoring-v2 gcp-quota-exporter .
 ```
 
 NOTE: The deployment expects you to provide a secret with the service account to mount in the pod.
+
+## Grafana Dashboard
+
+Once you have this in Prometheus you can start using it and create alerts or generate Grafana Dashboards for detect when you are reaching a limit,
+in the `grafana` folder you have an example of a simple dashboard that does some basic Prometheus queries.
