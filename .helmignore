@@ -21,3 +21,5 @@
 .idea/
 *.tmproj
 .vscode/
+# Secret files used via Helm Secrets plugin
+secrets.values.*

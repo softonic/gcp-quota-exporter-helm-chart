@@ -7,10 +7,13 @@ replicaCount: 1
 image:
   repository: mintel/gcp-quota-exporter
   pullPolicy: IfNotPresent
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
+
+gcpProject: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -72,3 +75,5 @@ affinity: {}
 annotations:
   prometheus.io/scrape: "true"
   prometheus.io/port: "9592"
+
+podLabels: {}

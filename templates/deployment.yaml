@@ -13,6 +13,9 @@ spec:
     metadata:
       labels:
         {{- include "gcp-quota-exporter.selectorLabels" . | nindent 8 }}
+    {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
     {{- with .Values.annotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
@@ -25,10 +28,13 @@ spec:
       serviceAccountName: {{ include "gcp-quota-exporter.serviceAccountName" . }}
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          args:
-            - kubertonic
+          env:
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /app/credentials.json
+            - name: GOOGLE_PROJECT_ID
+              value: {{ .Values.gcpProject }}
           ports:
             - name: http
               containerPort: 9592

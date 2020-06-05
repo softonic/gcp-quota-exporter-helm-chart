@@ -1,4 +1,5 @@
 # GCP Quota Exporter
+
 As we want to get the resource quotas of our GCP projects and check when we are exhausting the limits we need
 to get the data from GCP and export them somewhere, in this case this exports the data to Prometheus.
 
@@ -8,6 +9,7 @@ how it works, you can follow the next steps:
 ## Test
 
 ### Create Service Account file
+
 ```bash
 gcloud iam service-accounts create gcp-quota-exporter --project ${GCP_PROJECT}
 gcloud projects add-iam-policy-binding ${GCP_PROJECT} \
@@ -19,7 +21,11 @@ gcloud iam service-accounts keys create service-account-gcp-quota-exporter.json 
 
 ### Launch exporter as a test
 ```bash
-docker run -it --rm -v $(pwd)/service-account-gcp-quota-exporter.json:/app/credentials.json mintel/gcp-quota-exporter ${GCP_PROJECT}
+docker run -it --rm \
+  -p 9592:9592 \
+  -v $(pwd)/service-account-gcp-quota-exporter.json:/app/credentials.json \
+  -e GOOGLE_APPLICATION_CREDENTIALS=/app/credentials.json \
+  -e GOOGLE_PROJECT_ID=${GCP_PROJECT} mintel/gcp-quota-exporter
 ```
 
 ### Check exporter output
@@ -41,7 +47,7 @@ gcp_quota_limit{metric="AUTOSCALERS",project="PROJECT_NAME",region="asia-southea
 ```
 
 ## Deploy in production
-This uses helm, the idea is to add this as a subchart of your preferred monitoring chart, but it can be launched independently as well:
+This use helm, the idea is to add this as a subchart of your preferred monitoring chart, but it can be launched independently as well:
 
 ```bash
 helm upgrade --install --namespace monitoring-v2 gcp-quota-exporter .
