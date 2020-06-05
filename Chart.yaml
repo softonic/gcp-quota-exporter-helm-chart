@@ -5,7 +5,7 @@ description: Obtains the resource quotas from a GCP project and allows to export
 icon: https://pbs.twimg.com/profile_images/1190319303041724417/1a61e4pu_400x400.jpg
 sources:
   - https://github.com/softonic/gcp-quota-exporter-helm-chart
-version: 1.0.0
+version: 1.1.0
 appVersion: v0.3.1
 keywords:
   - gcp

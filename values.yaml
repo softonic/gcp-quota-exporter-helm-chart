@@ -54,6 +54,27 @@ ingress:
 
 serviceAccountSecret: gcp-quota-sa
 
+livenessProbe:
+  failureThreshold: 3
+  httpGet:
+    path: /metrics
+    port: http
+    scheme: HTTP
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 5
+
+readinessProbe:
+  failureThreshold: 3
+  httpGet:
+    path: /metrics
+    port: http
+    scheme: HTTP
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 5
+
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little

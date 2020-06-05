@@ -40,13 +40,9 @@ spec:
               containerPort: 9592
               protocol: TCP
           livenessProbe:
-            httpGet:
-              path: /metrics
-              port: http
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
-            httpGet:
-              path: /metrics
-              port: http
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
