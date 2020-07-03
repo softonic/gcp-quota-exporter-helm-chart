@@ -93,8 +93,27 @@ tolerations: []
 
 affinity: {}
 
-annotations:
-  prometheus.io/scrape: "true"
-  prometheus.io/port: "9592"
+annotations: {}
+#  prometheus.io/scrape: "true"
+#  prometheus.io/port: "9592"
 
 podLabels: {}
+
+# Enable this if you're using https://github.com/coreos/prometheus-operator
+serviceMonitor:
+  # When set true then use a ServiceMonitor to configure scraping
+  enabled: false
+  # Set the namespace the ServiceMonitor should be deployed
+  # namespace: monitoring
+  # additionalLabels is the set of additional labels to add to the ServiceMonitor
+  additionalLabels: {}
+  # Set how frequently Prometheus should scrape
+  # interval: 30s
+  # Set path to exporter telemetry-path
+  # path: /metrics
+  # Set specific labels for the ServiceMonitor, use this to define your scrape label for Prometheus Operator
+  # additionalLabels:
+  # Set timeout for scrape
+  # timeout: 10s
+  ## Defaults to what's used if you follow CoreOS [Prometheus Install Instructions](https://github.com/helm/charts/tree/master/stable/prometheus-operator#tldr)
+  honorLabels: true
