@@ -1,0 +1,16 @@
+project:
+  name: Google Cloud Platform Quota Exporter
+  shortName: gcp-quota-exporter
+  url: https://github.com/softonic/gcp-quota-exporter-helm-chart
+  description: Obtains the resource quotas from a GCP project and allows to export them to Prometheus
+  app: gcp-quota-exporter
+repository:
+  url: https://hub.helm.sh/charts/softonic/gcp-quota-exporter
+  name: gcp-quota-exporter
+chart:
+  name: gcp-quota-exporter
+  version: 2.0.0
+  values: "-- generate from values file --"
+  valuesExample: "-- generate from values file --"
+prerequisites:
+  - "You need a service account with `roles/compute.instanceAdmin` permissions"
