@@ -2,17 +2,24 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+# desired number of pods
 replicaCount: 1
 
 image:
+  # container image repository
   repository: mintel/gcp-quota-exporter
+  # container image pull policy
   pullPolicy: IfNotPresent
+  # container image tag
   tag: ""
 
+# container image pull secrets
 imagePullSecrets: []
+
 nameOverride: ""
 fullnameOverride: ""
 
+# Google Cloud Platform project name to scrape data from
 gcpProject: ""
 
 serviceAccount:
@@ -36,23 +43,31 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
+  # type of service to create
   type: ClusterIP
+  # port for the http service
   port: 80
 
 ingress:
+  # enable or disable ingress
   enabled: false
+  # ingress annotations
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
+  # Hosts to configure the ingress
   hosts:
     - host: chart-example.local
       paths: []
+  # TLS certificate info defined here
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
 
+# name of the secret that contains the service account needed to get the data from GCP
 serviceAccountSecret: gcp-quota-sa
+
 
 livenessProbe:
   failureThreshold: 3
@@ -93,6 +108,7 @@ tolerations: []
 
 affinity: {}
 
+# If you don't use prometheus operator you could use some annotations to use the Prometheus SD
 annotations: {}
 #  prometheus.io/scrape: "true"
 #  prometheus.io/port: "9592"
@@ -104,16 +120,17 @@ serviceMonitor:
   # When set true then use a ServiceMonitor to configure scraping
   enabled: false
   # Set the namespace the ServiceMonitor should be deployed
-  # namespace: monitoring
+  namespace: null
   # additionalLabels is the set of additional labels to add to the ServiceMonitor
   additionalLabels: {}
   # Set how frequently Prometheus should scrape
   # interval: 30s
+  interval: null
   # Set path to exporter telemetry-path
   # path: /metrics
-  # Set specific labels for the ServiceMonitor, use this to define your scrape label for Prometheus Operator
-  # additionalLabels:
+  path: null
   # Set timeout for scrape
   # timeout: 10s
+  timeout: null
   ## Defaults to what's used if you follow CoreOS [Prometheus Install Instructions](https://github.com/helm/charts/tree/master/stable/prometheus-operator#tldr)
   honorLabels: true
