@@ -13,7 +13,7 @@ how it works, you can follow the next steps:
 ```console
 $ helm repo add gcp-quota-exporter https://hub.helm.sh/charts/softonic/gcp-quota-exporter
 $ helm repo update
-$ helm install  gcp-quota-exporter/gcp-quota-exporter -n  --version=2.0.0
+$ helm install gcp-quota-exporter/gcp-quota-exporter -n --version=2.0.1
 ```
 
 ## Introduction
@@ -92,7 +92,7 @@ The command removes all the Kubernetes components associated with the chart and 
 
 The following table lists the configurable parameters of the `gcp-quota-exporter` chart and their default values.
 
-|             Parameter             |                                                                         Description                                                                          |           Default           |
+| Parameter                         | Description                                                                                                                                                  | Default                     |
 |-----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|
 | replicaCount                      | desired number of pods                                                                                                                                       | `1`                         |
 | image.repository                  | container image repository                                                                                                                                   | `mintel/gcp-quota-exporter` |
@@ -137,6 +137,7 @@ The following table lists the configurable parameters of the `gcp-quota-exporter
 | serviceMonitor.enabled            | When set true then use a ServiceMonitor to configure scraping                                                                                                | `false`                     |
 | serviceMonitor.namespace          | Set the namespace the ServiceMonitor should be deployed                                                                                                      | `null`                      |
 | serviceMonitor.additionalLabels   | additionalLabels is the set of additional labels to add to the ServiceMonitor                                                                                | `{}`                        |
+| serviceMonitor.scrapePort         | Set default port to scrape                                                                                                                                   | `http`                      |
 | serviceMonitor.interval           | Set how frequently Prometheus should scrape interval: 30s                                                                                                    | `null`                      |
 | serviceMonitor.path               | Set path to exporter telemetry-path path: /metrics                                                                                                           | `null`                      |
 | serviceMonitor.timeout            | Set timeout for scrape timeout: 10s                                                                                                                          | `null`                      |
@@ -146,14 +147,14 @@ The following table lists the configurable parameters of the `gcp-quota-exporter
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
 
 ```console
-$ helm install  gcp-quota-exporter/gcp-quota-exporter -n  --version=2.0.0 --set replicaCount=1
+$ helm install gcp-quota-exporter/gcp-quota-exporter -n --version=2.0.1 --set replicaCount=1
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while
 installing the chart. For example:
 
 ```console
-$ helm install  gcp-quota-exporter/gcp-quota-exporter -n  --version=2.0.0 --values values.yaml
+$ helm install gcp-quota-exporter/gcp-quota-exporter -n --version=2.0.1 --values values.yaml
 ```
 
 ## Grafana Dashboard

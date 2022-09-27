@@ -126,6 +126,8 @@ serviceMonitor:
   # Set how frequently Prometheus should scrape
   # interval: 30s
   interval: null
+  # Default port to scrape
+  targetPort: http
   # Set path to exporter telemetry-path
   # path: /metrics
   path: null
