@@ -23,3 +23,5 @@
 .vscode/
 # Secret files used via Helm Secrets plugin
 secrets.values.*
+docs/
+grafana/
