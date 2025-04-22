@@ -66,8 +66,8 @@ ingress:
   #      - chart-example.local
 
 # name of the secret that contains the service account needed to get the data from GCP
-serviceAccountSecret: gcp-quota-sa
-
+serviceAccountSecret: monitoring-v3--stackdriver
+subPath: private_key
 
 livenessProbe:
   failureThreshold: 3

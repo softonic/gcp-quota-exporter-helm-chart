@@ -49,7 +49,7 @@ spec:
             {{- if .Values.serviceAccountSecret }}
             - name: stackdriver-service-account
               mountPath: /app/credentials.json
-              subPath: credentials.json
+              subPath: {{ .Values.subPath }}
             {{- end}}
       volumes:
       {{- if .Values.serviceAccountSecret }}
