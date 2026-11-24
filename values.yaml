@@ -66,6 +66,10 @@ ingress:
   #      - chart-example.local
 
 # name of the secret that contains the service account needed to get the data from GCP
+# Secret with a service account JSON key, mounted at /app/credentials.json and set as
+# GOOGLE_APPLICATION_CREDENTIALS. Set it to "" to use Workload Identity instead: no key is
+# mounted, and the exporter takes Application Default Credentials from the GKE metadata
+# server (annotate serviceAccount with iam.gke.io/gcp-service-account).
 serviceAccountSecret: monitoring-v3--stackdriver
 subPath: private_key
 
